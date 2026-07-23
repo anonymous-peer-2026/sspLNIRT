@@ -1,0 +1,46 @@
+Package: sspLNIRT
+Title: SampleSize Planning for the Joint Hierarchical Model
+Version: 0.0.0.9000
+Date: 2026-07-23
+Authors@R: 
+    person(given = "Anonymous",
+           family = "Anonymous",
+           email = "anonymous@example.com",
+           role = c("aut", "cre"))
+Description: Sample size planning tools for the Joint Hierarchical Model using a 2-PL normal ogive model for response accuracy and a 3-PL log-normal model for response time. Precomputed results can be accessed instantly, custom designs can be computed, and diagnostics can be used to interpret results. 
+License: MIT + file LICENSE
+Imports: 
+    bsicons,
+    bslib,
+    config,
+    future.apply,
+    ggplot2 (>= 3.5.0),
+    golem,
+    LNIRT,
+    MASS,
+    posterior,
+    progressr,
+    purrr,
+    rlang,
+    shiny,
+    shinyMatrix,
+    tmvtnorm,
+    markdown
+Suggests: 
+    knitr,
+    spelling,
+    rmarkdown,
+    future,
+    testthat (>= 3.0.0),
+    mockery
+Config/testthat/edition: 3
+Encoding: UTF-8
+Language: en-US
+LazyData: true
+LazyDataCompression: xz
+RoxygenNote: 7.3.3
+VignetteBuilder: knitr
+Depends: 
+    R (>= 3.5)
+URL: https://github.com/anonymous-peer-2026/sspLNIRT, https://anonymous-peer-2026.github.io/sspLNIRT/
+BugReports: https://github.com/anonymous-peer-2026/sspLNIRT/issues

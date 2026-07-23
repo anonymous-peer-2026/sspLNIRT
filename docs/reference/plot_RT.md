@@ -1,0 +1,153 @@
+# Plot Simulated Response Times
+
+Simulates data under the Joint Hierarchical Model and plots the
+resulting response time distribution. The plot type depends on
+\`level\`, \`logRT\` and \`overlay\`:
+
+\- \*\*Person, seconds\*\*: Density of mean response time per person
+(seconds), trimmed at the 99th percentile, with quantile reference
+lines. - \*\*Person, log\*\*: Same density on the log-RT scale
+(untrimmed). - \*\*Item, seconds\*\*: Per-item density of response times
+(seconds), trimmed at the 97.5th percentile per item, with the median
+marked. - \*\*Item, log\*\*: Per-item density on the log-RT scale
+(untrimmed, fixed y-axis across items). - \*\*Item, \`overlay =
+TRUE\`\*\*: All item densities are drawn as lines in a single panel
+instead of a facet grid.
+
+Data are generated via \[sim.jhm.data()\] with \`scale = FALSE\`.
+Response times are on the log scale in the generative model; the seconds
+scale is obtained via exponentiation.
+
+## Usage
+
+``` r
+plot_RT(
+  design = NULL,
+  level = "item",
+  logRT = FALSE,
+  overlay = FALSE,
+  N = 1000,
+  K = 30,
+  mu.person = c(0, 0),
+  mu.item = c(1, 0, 0.5, 1),
+  meanlog.sigma2 = log(0.6),
+  cov.m.person = matrix(c(1, 0.4, 0.4, 1), ncol = 2, byrow = TRUE),
+  cov.m.item = matrix(c(1, 0, 0, 0, 0, 1, 0, 0.4, 0, 0, 1, 0, 0, 0.4, 0, 1), ncol = 4,
+    byrow = TRUE),
+  sd.item = c(0.2, 1, 0.2, 0.5),
+  sdlog.sigma2 = 0,
+  item.pars.m = NULL,
+  cor2cov.item = FALSE
+)
+```
+
+## Arguments
+
+- design:
+
+  Optional list or \`"sspLNIRT.design"\` object holding the
+  data-generating design. When supplied, its fields are used for any
+  design-related argument the caller did not pass explicitly (\`K\`,
+  \`mu.person\`, \`mu.item\`, \`meanlog.sigma2\`, \`cov.m.person\`,
+  \`cov.m.item\`, \`sd.item\`, \`sdlog.sigma2\`, \`item.pars.m\`,
+  \`cor2cov.item\`). Caller- supplied arguments always take precedence.
+  Extra fields in \`design\` (e.g. \`thresh\`, \`out.par\`, \`seed\`)
+  are ignored, so the object returned in \`\$design\` by
+  \[get_sspLNIRT()\] or \[optim_sample()\] can be passed directly.
+  Default \`NULL\` (use the function defaults / caller arguments).
+
+- level:
+
+  Character. \`"person"\` for person-level aggregates or \`"item"\` for
+  item-level curves / distributions.
+
+- logRT:
+
+  Logical. If \`TRUE\`, response times are shown on the log scale; if
+  \`FALSE\`, on the seconds scale.
+
+- overlay:
+
+  Logical. If \`TRUE\` and \`level = "item"\`, all item densities are
+  drawn in one panel rather than faceted. Ignored when \`level =
+  "person"\`. Default is \`FALSE\`. The item legend is suppressed for
+  more than 12 items.
+
+- N:
+
+  Integer. Sample size (number of persons) for the simulated data.
+  Default is 1000.
+
+- K:
+
+  Integer. Test length (number of items). Default is 10.
+
+- mu.person:
+
+  Numeric vector of length 2. Population means of \\(\theta, \zeta)\\.
+
+- mu.item:
+
+  Numeric vector of length 4. Population means of \\(\alpha, \beta,
+  \varphi, \lambda)\\.
+
+- meanlog.sigma2:
+
+  Numeric. Mean of the log-normal distribution for \\\sigma^2\\ (on the
+  log scale).
+
+- cov.m.person:
+
+  2x2 symmetric matrix. Covariance matrix of \\(\theta, \zeta)\\.
+
+- cov.m.item:
+
+  4x4 symmetric matrix. Covariance (or correlation) matrix of \\(\alpha,
+  \beta, \varphi, \lambda)\\. See \`cor2cov.item\`.
+
+- sd.item:
+
+  Numeric vector of length 4. Standard deviations of \\(\alpha, \beta,
+  \varphi, \lambda)\\. Required when \`cor2cov.item = TRUE\`.
+
+- sdlog.sigma2:
+
+  Numeric. Standard deviation of the log-normal distribution for
+  \\\sigma^2\\. Default is 0.
+
+- item.pars.m:
+
+  Matrix with 4 columns or \`NULL\`. If supplied, item parameters are
+  held fixed instead of drawn from the truncated MVN.
+
+- cor2cov.item:
+
+  Logical. If \`TRUE\`, \`cov.m.item\` is treated as a correlation
+  matrix and converted using \`sd.item\`.
+
+## Value
+
+A \[ggplot2::ggplot\] object.
+
+## See also
+
+\[plot_RA()\]; \[theme_sspLNIRT()\].
+
+## Examples
+
+``` r
+if (FALSE) { # \dontrun{
+plot_RT(level = "person", logRT = TRUE,  N = 500, K = 10)
+plot_RT(level = "item",   logRT = TRUE, N = 1000, K = 5,
+        mu.item = c(1, 0, 0.4, 1), sd.item = c(0.2, 1, 0.2, 0.5))
+
+# Many items: overlay instead of faceting
+plot_RT(level = "item", logRT = TRUE, overlay = TRUE, N = 1000, K = 30)
+
+# Pass a design object retrieved from get_sspLNIRT() (or optim_sample()):
+res <- get_sspLNIRT(thresh = 0.10, out.par = "alpha",
+                    K = 30, mu.alpha = 1,
+                    meanlog.sigma2 = log(0.6), rho = 0.4)
+plot_RT(res$design, level = "item", logRT = FALSE)
+} # }
+```

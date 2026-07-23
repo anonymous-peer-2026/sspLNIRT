@@ -1,0 +1,137 @@
+# sspLNIRT
+
+![sspLNIRT logo](reference/figures/logo.png)
+
+`sspLNIRT` is a sample size planning tool for item calibration with the
+Joint Hierarchical Model (JHM) of response accuracy and response time.
+It estimates the minimum sample size required to achieve a target
+accuracy (RMSE) of item parameter estimates under a specified
+data-generating process.
+
+The package provides:
+
+- **Precomputed results** for various design conditions, accessible
+  instantly via a Shiny app and/or R package.
+- **Custom Sample Size Estimation** via
+  [`optim_sample()`](https://anonymous-peer-2026.github.io/sspLNIRT/reference/optim_sample.md)
+  for design conditions outside the precomputed data.
+- **Diagnostic functions** for inspecting parameter accuracy or bias,
+  power curves, and implied response time and response accuracy
+  distributions.
+
+## Usage
+
+The tool is available as an R package and as an interactive Shiny app.
+
+### Web App
+
+Use the app at
+[anonymous-peer-2026.shinyapps.io/sspLNIRT](https://anonymous-peer-2026.shinyapps.io/sspLNIRT/).
+
+### Installation
+
+You can install the latest version of the R package from GitHub:
+
+``` r
+# install devtools if needed
+if (!requireNamespace("devtools")) {install.packages("devtools")}
+
+# install from GitHub
+devtools::install_github("anonymous-peer-2026/sspLNIRT")
+```
+
+### System Requirements
+
+The `sspLNIRT` package was built under R version 4.4.3 using Apple clang
+version 16.0.0 (clang-1600.0.26.6) and GNU Fortran (GCC) 14.2.0. To
+compile R packages from source, install the appropriate toolchain:
+
+- macOS: see <https://mac.r-project.org/tools/>
+- Windows: see <https://cran.r-project.org/bin/windows/Rtools/>
+
+### Run
+
+Launch the Shiny app locally with:
+
+``` r
+sspLNIRT::run_app()
+```
+
+## Documentation
+
+Vignettes and full function documentation are available at
+[github.com/anonymous-peer-2026/sspLNIRT](https://github.com/anonymous-peer-2026/sspLNIRT/).
+
+## Citation
+
+Please cite `sspLNIRT` if you use it. To cite the software, use:
+
+Author A (2026). *sspLNIRT: Sample Size Planning for Item Calibration
+using the Joint Hierarchical Model*. R package version 0.0.0.9000,
+<https://github.com/anonymous-peer-2026/sspLNIRT>.
+
+Or copy the reference information to your BibTeX file:
+
+``` bibtex
+@Manual{,
+    title = {sspLNIRT: Sample Size Planning for Item Calibration using the Joint Hierarchical Model},
+    author = {Anonymous Author},
+    year = {2026},
+    note = {R package version 0.0.0.9000},
+    url = {https://github.com/anonymous-peer-2026/sspLNIRT},
+  }
+```
+
+## Code of Conduct
+
+I am open to feedback and new ideas. Please mind the Contributor Code of
+Conduct.
+
+## About
+
+You are reading the doc about version: 0.0.0.9000
+
+This README has been compiled on 2026-07-23 15:37:25.
+
+# Package index
+
+## All functions
+
+- [`available_configs()`](https://anonymous-peer-2026.github.io/sspLNIRT/reference/available_configs.md)
+  : List Available Precomputed Configurations
+- [`comp_rmse()`](https://anonymous-peer-2026.github.io/sspLNIRT/reference/comp_rmse.md)
+  : Compute RMSE of Parameter Estimates using Monte-Carlo Simulations
+- [`get_sspLNIRT()`](https://anonymous-peer-2026.github.io/sspLNIRT/reference/get_sspLNIRT.md)
+  : Retrieve Precomputed Sample Size Results
+- [`optim_sample()`](https://anonymous-peer-2026.github.io/sspLNIRT/reference/optim_sample.md)
+  : Optimize the Minimum Sample Size using Monte Carlo Simulations
+- [`plot(`*`<sspLNIRT>`*`)`](https://anonymous-peer-2026.github.io/sspLNIRT/reference/plot.sspLNIRT.md)
+  : Plot Method for sspLNIRT Objects
+- [`plot_RA()`](https://anonymous-peer-2026.github.io/sspLNIRT/reference/plot_RA.md)
+  : Plot Simulated Response Accuracy
+- [`plot_RT()`](https://anonymous-peer-2026.github.io/sspLNIRT/reference/plot_RT.md)
+  : Plot Simulated Response Times
+- [`plot_estimation()`](https://anonymous-peer-2026.github.io/sspLNIRT/reference/plot_estimation.md)
+  : Plot Estimation Metrics by Parameter Value
+- [`plot_power_curve()`](https://anonymous-peer-2026.github.io/sspLNIRT/reference/plot_power_curve.md)
+  : Plot Power Curve from Sample Size Optimization
+- [`print(`*`<summary.sspLNIRT>`*`)`](https://anonymous-peer-2026.github.io/sspLNIRT/reference/print.summary.sspLNIRT.md)
+  : Print Method for sspLNIRT Summary Objects
+- [`run_app()`](https://anonymous-peer-2026.github.io/sspLNIRT/reference/run_app.md)
+  : Run the Shiny Application
+- [`sspLNIRT.data`](https://anonymous-peer-2026.github.io/sspLNIRT/reference/sspLNIRT.data.md)
+  : Precomputed Sample Size Planning Results
+- [`scale_colour_sspLNIRT()`](https://anonymous-peer-2026.github.io/sspLNIRT/reference/sspLNIRT_scales.md)
+  [`scale_fill_sspLNIRT()`](https://anonymous-peer-2026.github.io/sspLNIRT/reference/sspLNIRT_scales.md)
+  : Discrete colour / fill scales for sspLNIRT plots
+- [`summary(`*`<sspLNIRT>`*`)`](https://anonymous-peer-2026.github.io/sspLNIRT/reference/summary.sspLNIRT.md)
+  : Summarise an sspLNIRT Object
+- [`theme_sspLNIRT()`](https://anonymous-peer-2026.github.io/sspLNIRT/reference/theme_sspLNIRT.md)
+  : sspLNIRT Plot Theme
+
+# Articles
+
+### All vignettes
+
+- [Sample Size Planning with
+  sspLNIRT](https://anonymous-peer-2026.github.io/sspLNIRT/articles/sspLNIRT.md):
